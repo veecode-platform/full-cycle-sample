@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: full-cycle-test 
+spec:
+  selector:
+    matchLabels:
+      app: full-cycle-test
+  template:
+    metadata:
+      labels:
+        app: full-cycle-test
+    spec:
+      containers:
+        - image: okteto.dev/java-gradle-full-cycle-test:1.0.0
+          name: full-cycle-test
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: full-cycle-test
+spec:
+  type: ClusterIP
+  ports:
+    - name: "full-cycle-test"
+      port: 8080
+  selector:
+    app: full-cycle-test
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: full-cycle-test
+  annotations:
+    dev.okteto.com/generate-host: full-cycle-test
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: full-cycle-test
+                port:
+                  number: 8080
+            path: /
+            pathType: ImplementationSpecific

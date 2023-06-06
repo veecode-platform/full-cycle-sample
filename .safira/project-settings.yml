@@ -1,0 +1,8 @@
+project:
+  name: full-cycle-test
+  description: 
+  java:
+    package: codes.platform.demo
+  language: java
+  framework: springboot
+  applicationPort: 8080

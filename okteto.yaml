@@ -1,0 +1,19 @@
+name: full-cycle-test
+build:
+  full-cycle-test:
+    image: okteto.dev/java-gradle-full-cycle-test:1.0.0
+    dockerfile: Dockerfile.okteto
+    context: .
+deploy:
+  - kubectl apply -f okteto-k8s.yaml
+dev:
+  full-cycle-test:
+    image: veecode/okteto-runtime:java17
+    command: ./gradlew build --continuous --quiet & 2>1 >/dev/null && ./gradlew bootRun
+    sync:
+      - .:/usr/src/app
+    forward:
+      - 8080:8080
+      - 5005:5005
+    volumes:
+      - /home/gradle/.gradle

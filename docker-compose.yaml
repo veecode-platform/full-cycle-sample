@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  full-cycle-test:
+    container_name: full-cycle-test 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"

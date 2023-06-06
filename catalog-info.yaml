@@ -1,0 +1,20 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: full-cycle-test
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-id: "full-cycle-test"
+    github.com/project-slug: veecode-platform/full-cycle-sample
+    vault.io/secrets-path: "full-cycle-test"
+    grafana/tag-selector: "full-cycle-test"
+    grafana/alert-label-selector: "alertname=full-cycle-test"
+    argocd/proxy-url: '/argocd/api'
+    argocd/app-name: "full-cycle-test"
+spec:
+  type: service
+  lifecycle: experimental
+  owner: admin
+
+
+
